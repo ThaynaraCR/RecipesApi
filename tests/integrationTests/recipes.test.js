@@ -1,6 +1,6 @@
 require('dotenv').config();
 const request = require('supertest');
-const routes = require('../../routes/devPro');
+const routes = require('../../routes/index');
 const app = require('../../app');
 const mongoose = require('mongoose');
 app.use(routes);
@@ -10,6 +10,12 @@ let body = {
   name: "oi",
   ingredients: "oi",
   description: "oi"
+}
+
+let user = {
+  name: "oi",
+  login: "oi",
+  password: "oi"
 }
 
 beforeAll(done => {
@@ -23,8 +29,11 @@ afterAll(done => {
 
 describe('Configuration tests', () => {
 
+  //logar usuario e pegar o token
+
   test('Shoud create a recipe', async () => {
     const res = await req.post('/api/', body)
+   // .set('Authorization', 'bearer ' + auth.token)
     expect(res.status).toEqual(201);
     expect(res.body).toEqual(expect.any(Object));
     body._id = res.body._id

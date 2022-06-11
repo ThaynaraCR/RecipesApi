@@ -8,6 +8,7 @@ const UserController = require('../controller/UserController')
 
 router.post('/user', UserController.newUser);
 router.post('/login', UserController.login);
+
 router.use(authUser)
 router.post('/', RecipesController.createRecipe)
 router.post('/img/:idRecipe',  multer(multerConfig).fields([{
