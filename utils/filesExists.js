@@ -3,6 +3,7 @@ const fs = require("fs");
 const verifyFile = async (path) =>{
 
   await  fs.access(path, (fileNotExist) => {
+    
         if (fileNotExist) {
           fs.mkdir(path, (errorToCreate) => {
             if (errorToCreate) {

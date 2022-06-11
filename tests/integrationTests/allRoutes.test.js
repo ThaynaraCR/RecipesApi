@@ -35,6 +35,8 @@ jest.useRealTimers();
 
 describe('Configuration tests', () => {
 
+  //testar rota com pupeter aqui
+
   test('Should create a recipe', async () => {
     const res = await req.post('/api/', body)
     expect(res.status).toEqual(201);

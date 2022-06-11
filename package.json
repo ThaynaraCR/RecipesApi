@@ -5,7 +5,12 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "cluster": "pm2 start app.js -i max",
+    "reload": "pm2 reload all",
+    "stop": "pm2 stop all",
+    "ls": "pm2 ls",
     "test": "jest --watchAll --detectOpenHandles",
+    "autocannon": "npx autocannon -c 500 -d 30 --renderStatusCodes --latency localhost:3000/api",
     "dev": "nodemon app.js"
   },
   "author": "",
@@ -26,6 +31,10 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
+    "pm2": "^5.2.0",
     "supertest": "^6.2.3"
+  },
+  "devDependencies": {
+    "autocannon": "^7.9.0"
   }
 }
