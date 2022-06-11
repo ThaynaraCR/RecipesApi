@@ -40,24 +40,5 @@ module.exports = {
       });
     },
 
-  }),
-  // limits: {
-  //   fileSize: 2 * 1024 * 1024
-  // },
-  // fileFilter: (req, file, cb) => {
-  //   const ext = path.extname(file.originalname).toLowerCase()
-  //   const allowedMimes = [
-  //     ".jpg",
-  //     ".png",
-  //     ".pdf",
-  //     ".doc",
-  //     ".docx"
-  //   ];
-
-  //   if (allowedMimes.includes(ext)) {
-  //     cb(null, true);
-  //   } else {
-  //     cb(new Error("formato invalido"))
-  //   }
-  // }
+  })
 };

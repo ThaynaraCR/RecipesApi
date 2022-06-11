@@ -6,7 +6,6 @@ const authUser = require('../middlewares/auth');
 const RecipesController = require('../controller/RecipesController')
 const UserController = require('../controller/UserController')
 
-
 router.post('/user', UserController.newUser);
 router.post('/login', UserController.login);
 router.use(authUser)

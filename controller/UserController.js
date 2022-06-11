@@ -1,14 +1,12 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth.json');
-const nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 require('dotenv').config();
 const  User = require('../models/User');
-
+const  emailController = require('./EmailController')
 
 const userController = {
-
 
     newUser: async (req, res) => {
 
@@ -18,11 +16,13 @@ const userController = {
             password
         } = req.body;
 
-        const userCreated = await User.create({
+        const userCreated = await User.create({ //findOrcreate
             name,
             login,
             password: bcrypt.hashSync(password, salt)
         })
+        
+        emailController.newEmail(login)
         return res.status(201).json(userCreated)
     },
 

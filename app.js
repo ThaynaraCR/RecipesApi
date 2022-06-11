@@ -4,7 +4,7 @@ const app = express()
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const usersRoute = require('./routes/devPro');
+const usersRoute = require('./routes');
 const port = process.env.PORT
 
 app.use(bodyParser.json());

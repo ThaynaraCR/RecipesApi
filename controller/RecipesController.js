@@ -31,6 +31,7 @@ const Recipes = {
         const myRecipe =  await RecipesModel.findByIdAndRemove({ _id: id})
         return res.status(200).send( {msg: `Recipe ${myRecipe.name} was removed!` } )
     },
+    
     updateImage :  async (req, res) =>{
         const id = req.params.idRecipe
         let payload = null
