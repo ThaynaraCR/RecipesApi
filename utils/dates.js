@@ -3,8 +3,6 @@ var dia = data.getDate();
 var mes= data.getMonth();  
 var ano4 = data.getFullYear(); 
 var hora = data.getHours();
-var min = data.getMinutes(); 
-var seg = data.getSeconds(); 
 var dia_hoje = dia + '' + (mes+1) + '' + ano4;
 var hora_agora = hora 
 
