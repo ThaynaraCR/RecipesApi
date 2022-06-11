@@ -1,44 +1,50 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth.json');
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');//manda email de boas vindas
 var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 require('dotenv').config();
-const {
-    usuario
-
-} = require('../models');
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const  User = require('../models/User');
 
 //criar a função de criar um usuario 
 
-const loginController = {
+const userController = {
 
-    usuario: async (req, res) => {
+
+    newUser: async (req, res) => {
 
         const {
-            email,
-            senha
+            name,
+            login,
+            password
         } = req.body;
 
-        const umUsuario = await usuario.findOne({
-            where: {
-                email: email
-            }
+        const userCreated = await User.create({
+            name,
+            login,
+            password: bcrypt.hashSync(password, salt)
         })
+        return res.status(201).json(userCreated)
+    },
 
-        if (!umUsuario) {
+    login: async (req, res) => {
 
-            let msg = `Usuário não cadastrado! Gostaria de cadastrar o email ${email} ?`; //se sim da um insert em solicitacoes
+        const {
+            login,
+            password
+        } = req.body;
+
+        const user = await User.findOne({ login })
+
+        if (!user) {
             return res.status(404).send({
-                "withoutUser": msg
+                message:'User not found'
             })
 
         }
 
-        if (umUsuario) {
-            bcrypt.compare(senha, umUsuario.senha, function (err, result) {
+        if (user) {
+            bcrypt.compare(password, user.password, function (err, result) {
                 if (result) {
 
                     const token = jwt.sign({
@@ -48,15 +54,6 @@ const loginController = {
                     })
                     res.status(200).send({
                         "msg": "login realizado com sucesso",
-                        "id_usuario": umUsuario.id_usuario,
-                        "email": umUsuario.email,
-                        "nome": umUsuario.nome,
-                        "whatsapp": umUsuario.whatsapp,
-                        "igreja": umUsuario.igreja,
-                        "regiao": umUsuario.regiao,
-                        "bloco": umUsuario.bloco,
-                        "nivel_acesso": umUsuario.nivel_acesso,
-                        
                         token
                     })
 
@@ -75,4 +72,4 @@ const loginController = {
     },
 }
 
-module.exports = loginController
+module.exports = userController

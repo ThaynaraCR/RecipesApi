@@ -1,5 +1,5 @@
 require('../config/database');
-const RecipesModel = require('../model/Recipes');
+const RecipesModel = require('../models/Recipe');
 
 const Recipes = {
 
