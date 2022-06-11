@@ -1,12 +1,11 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth.json');
-const nodemailer = require('nodemailer');//manda email de boas vindas
+const nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 var salt = bcrypt.genSaltSync(10);
 require('dotenv').config();
 const  User = require('../models/User');
 
-//criar a função de criar um usuario 
 
 const userController = {
 
@@ -36,13 +35,6 @@ const userController = {
 
         const user = await User.findOne({ login })
 
-        if (!user) {
-            return res.status(404).send({
-                message:'User not found'
-            })
-
-        }
-
         if (user) {
             bcrypt.compare(password, user.password, function (err, result) {
                 if (result) {
@@ -66,6 +58,11 @@ const userController = {
                 }
 
             });
+        }else{
+            let msg = "Usuário ou senha invalidos!";
+            return res.status(404).send({
+                "msg": msg
+            })
         }
 
 
