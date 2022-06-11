@@ -16,14 +16,18 @@ const userController = {
             password
         } = req.body;
 
-        const userCreated = await User.create({ //findOrcreate
-            name,
-            login,
-            password: bcrypt.hashSync(password, salt)
-        })
-        
-        emailController.newEmail(login)
-        return res.status(201).json(userCreated)
+        try {
+            const userCreated = await User.create({ //can be findOrcreate
+                name,
+                login,
+                password: bcrypt.hashSync(password, salt)
+            })
+            emailController.newEmail(login)
+            return res.status(201).json(userCreated)
+        } catch (error) {
+            console.log("error create user: ", error)
+        }
+
     },
 
     login: async (req, res) => {
@@ -33,7 +37,12 @@ const userController = {
             password
         } = req.body;
 
-        const user = await User.findOne({ login })
+        try {
+            var user = await User.findOne({ login })
+        } catch (error) {
+            console.log("error find user")
+        }
+        
 
         if (user) {
             bcrypt.compare(password, user.password, function (err, result) {

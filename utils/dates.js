@@ -1,14 +1,14 @@
 var data = new Date();
-var dia = data.getDate(); 
-var mes= data.getMonth();  
-var ano4 = data.getFullYear(); 
-var hora = data.getHours();
-var dia_hoje = dia + '' + (mes+1) + '' + ano4;
-var hora_agora = hora 
+var day = data.getDate(); 
+var month= data.getMonth();  
+var year = data.getFullYear(); 
+var hour = data.getHours();
+var today = day + '' + (month+1) + '' + year;
+var now = hour 
 
- var dataHora = {
-   hoje : dia_hoje,
-   agora : hora_agora
+ var datahour = {
+   today ,
+   now 
   };
 
-module.exports = { dataHora }
+module.exports = { datahour }

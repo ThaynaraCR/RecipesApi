@@ -27,7 +27,7 @@ const emailController = {
             subject: "Welcome to recipes", 
             html: htmlTemplate
         }).then(info => {
-            console.log("enviado", info)
+            console.log("sended", info)
         }).catch(error => {
             console.log("error", error)
         })
