@@ -40,7 +40,7 @@ const Recipes = {
         const dataToUpdate = req.body
         try {
             const myRecipe =  await RecipesModel.findByIdAndUpdate({ _id: id}, dataToUpdate)
-            return res.status(200).send(myRecipe)
+            return res.status(200).send({msg:"Updated!"})
         } catch (error) {
             console.log("error update recipe:", error)
             return res.status(500).send({msg: "Some thing went wrong! Try Again"})

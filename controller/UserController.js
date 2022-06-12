@@ -17,7 +17,7 @@ const userController = {
         } = req.body;
 
         try {
-            const userCreated = await User.create({ //can be findOrcreate
+            const userCreated = await User.create({ //It can be findOrcreate
                 name,
                 login,
                 password: bcrypt.hashSync(password, salt)
@@ -54,13 +54,13 @@ const userController = {
                         expiresIn: 86400,
                     })
                     res.status(200).send({
-                        "msg": "login realizado com sucesso",
+                        "msg": "success",
                         token
                     })
 
                 } else {
 
-                    let msg = "Usuário ou senha invalidos!";
+                    let msg = "Invalid Credencials";
                     return res.status(404).send({
                         "msg": msg
                     })
@@ -68,7 +68,7 @@ const userController = {
 
             });
         }else{
-            let msg = "Usuário ou senha invalidos!";
+            let msg = "Invalid Credencials";
             return res.status(404).send({
                 "msg": msg
             })
